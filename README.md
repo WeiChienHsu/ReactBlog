@@ -44,11 +44,10 @@ https://reduxblog.herokuapp.com/api/posts
   },
 ]
 ```
+***
 
-### React Router (Single Page Application)
+## React Router (Single Page Application)
 No longer navigating between distinct HTML documents that are being created by some remote web server. Instead, we always deal with "single HTML document" and rely on the JavaScript code to chagne the set of components that a user sees apprearing on the screen. We're tracking the user and showing them different sets of components.
-
-
 
 - Manage the URL and our appliaction.
 ```
@@ -58,3 +57,34 @@ npm install --save react-router-dom@4.0.0
 - Browser said to the History Library and History wil run behind the server for us. To do some oarsing over it and figures out exactly what changed about the URL and pass it to React Router Library.
 - React Router receive the new Route and updates the react component shown on the screen.
 - React will rerender all components based on the new component.
+
+#### BrowserRouter
+Object is what interacts with the history library and decides exactly what to do based on the change of URL
+
+#### Route
+React Component that we can render inside of any other React Component inside our app (configuraion)
+
+#### Render into ReactDOM
+- Create Two Components to show how to use React Router
+```js
+class Hello extends React.Component{
+  render(){return <div>Hello!</div>}
+}
+
+class GoodBye extends React.Component{
+  render(){return <div>GoodBye!</div>}
+}
+```
+
+```js
+ReactDOM.render(
+  <Provider store={createStoreWithMiddleware(reducers)}>
+    <BrowserRouter>
+      <div>
+        <Route path = "/hello" component = { Hello } />
+        <Route path = "/goodbye" component = { GoodBye}/>
+      </div>
+    </BrowserRouter>
+  </Provider>
+  , document.querySelector('.container'));
+  ```
