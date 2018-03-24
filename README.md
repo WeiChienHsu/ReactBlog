@@ -53,6 +53,7 @@ No longer navigating between distinct HTML documents that are being created by s
 ```
 npm install --save react-router-dom@4.0.0
 ```
+![history](./image/deom.png)
 - User clicks on some links to change the URL inside their browser.
 - Browser said to the History Library and History wil run behind the server for us. To do some oarsing over it and figures out exactly what changed about the URL and pass it to React Router Library.
 - React Router receive the new Route and updates the react component shown on the screen.
