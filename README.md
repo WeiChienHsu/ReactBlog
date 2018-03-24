@@ -89,3 +89,27 @@ ReactDOM.render(
   </Provider>
   , document.querySelector('.container'));
   ```
+
+#### Root Route of App 
+- What will be showed for users
+```js
+<Route path = "/" component = { PostIndex}>
+```
+
+#### Route for Patricular Posts of App
+- Need to set up route configuration: wildcard -> colin id
+```js
+<Route path = "/posts/:id" component = { PostsShow }>
+```
+
+#### Route for Create Brand New Post
+```js
+<Route path = "/posts/new" component = { PostsNew }>
+```
+
+#### Delete App component
+- Now we had a React Router, no longer need this app component anymore.
+
+
+# State as an Object
+![Show Pages](./image/demo1.png)
