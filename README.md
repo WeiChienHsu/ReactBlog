@@ -113,3 +113,49 @@ ReactDOM.render(
 
 # State as an Object
 ![Show Pages](./image/demo1.png)
+- ActivePost is really a "duplicate piecce of state". Since the current route that a user is looking at is really another piece of state inside our application. Also, the ID that is reflected inside of that route or this particular route provides the exact same information as is being provided by ActivePost.
+- Since we've already used :id to reflect the current state, we just need a state to handle the posts.
+- When we had a URL, go back to see on the posts with that ID out of the list and show on the screen for users.
+- Save as an Object -> key: id of Post / value: post itself : make it easy to find the post we fetched
+```
+Easy to look up:
+state.posts[postId]
+```
+
+![Show Pages](./image/demo2.png)
+
+# Index Action
+## Action Creator
+- To fetch a list of posts and serve them up to our post index component
+
+### Axios & Redux Promise
+- Making Network Requests inside of an action creator.
+- Handle asynchronous nature of the request itself.
+- allpy Middleware "promise" intp index file
+```js
+const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+```
+### Build up a Request URL
+- Given a ROOT_URL
+- Given a Unique API_KEY
+- Get a Request by axios
+
+```js
+import axios from 'axios';
+export FETCH_POSTS = 'fetch_posts';
+
+const ROOT_URL = 'https://reduxblog.herokuapp.com/api';
+const API_KEY = '?key=weichien';
+
+export function fetchPosts() {
+  const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
+
+  return {
+    tyep: FETCH_POSTS,
+    payload: request ;
+  }
+}
+```
+
+# Post Reducer
+
