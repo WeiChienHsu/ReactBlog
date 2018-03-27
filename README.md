@@ -151,7 +151,7 @@ export function fetchPosts() {
   const request = axios.get(`${ROOT_URL}/posts${API_KEY}`);
 
   return {
-    tyep: FETCH_POSTS,
+    type: FETCH_POSTS,
     payload: request 
   }
 }
@@ -204,4 +204,84 @@ export default function(state = {}, action) {
 
   }
 }
+```
+## Connect Action Creator with Post Index Component
+- Directly Passing Action Creator itself instead of connectint funciton "mapDispatchToProp"
+- mapDispatchToProp: Separate function format when we want to use a seperate function
+```js
+export default connect(null, {fetchPosts : fetchPosts})(PostsIndex);
+```
+
+## When to reach out the API 
+- Event: when are we going to attempt to reach out to the API and fetch our list of Posts?
+
+
+### ComponentDidMount
+Will be called by React immedicately when the component was created and showed on the DOM
+- Great location to go and fetch some data or initiate some one time loading procedure.
+```js
+  componentDidMount() {
+    this.props.fetchPosts();
+  }
+```
+
+#### Fetchig data is an asynchronous operation.
+Take some times to take the data. React wouldn't automatically wait till the data was took, so we need some React lifecylec methods to help.
+
+
+## Manually Create a post to test
+- By using PostMan, make a POST Request to https://reduxblog.herokuapp.com/api/posts?key=weichien
+
+```js
+{
+    "title": "Kevin",
+    "categories": "Fun",
+    "content": "Great Fun Stories!"
+}
+```
+- Then, we can see in Google Developer Tool, Network category, there are some XHR requests.
+
+![NetWork](./image/demo3.png) 
+
+## Hoop up Application level State
+- Everytime we need to use application level state, we need "mapStateToProps" function
+```js
+function mapStateToProps(state) {
+  return { posts : state.posts } 
+}
+
+export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+```
+- Console.log:
+```
+218163:
+categories:"Fun"
+content:"Great Fun Stories!"
+id:218163
+title:"Kevin"
+```
+## renderPosts()
+- Since we request to an Object that contains a list of Posts, when we look at this.props.posts, it was an Object and we don't get a helper method to map it!
+- Map over an Object and return an array -> loadash
+
+```js
+  renderPosts() {
+    return _.map(this.props.posts, post => {
+      return(
+        <li className = "list-group-item" key = {post.id}>
+          {post.title}
+        </li> 
+      )
+    })
+  }
+```
+
+## Render the renderPosts in <ul>
+```js
+      <div>
+         <h3>Posts</h3>
+         <ul className = "list-group">
+          {this.renderPosts()}
+         </ul>
+      </div>
 ```
