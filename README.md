@@ -312,9 +312,24 @@ title:"Kevin"
 ```
 
 ## Navigation with the Link Component
+- In React Router, we just tell it to show a new set of components, not use anchor tags to do discrete navigation between different routes inside the browser.
 
+### Link Component
+- When click on a link tag, it has a couple of event handlers on it that prevent the browser to do what it normal did. (ex issue another Http Request to fetch other HTML documents from server)
+```js
+<div className = "text-xs-right">
+  <Link className = "btn btn-primary"  to = "/posts/new">
+    Add a Post
+  </Link>
+</div>
+```
 
-## Redux Form
+# Redux Form
+- Need to validate whatever the user puts into each of these inputs.
+- Redux from - Handle any type of form that we put together with redux validating the input and then submitting the form in some fashion.
+
+[Redux Form](https://redux-form.com/7.3.0/)
+- Provide all kinds of examples for all Form!
 
 
 ## Field Component
