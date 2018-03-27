@@ -294,12 +294,22 @@ title:"Kevin"
 - 4) Add Form to PostNew
 - 5) Make Action Creator to "Save Post" when use click 'Create', make sure it will be save to Backend
 
-
-## PostsNew
-
-
 ## Route Configuration
-
+- Wrong about Route defination : When React Router see a "/", it will render a PostsIndex Component. But when "/posts/new" also have slash, it still show the PostsIndex 
+- Not like the traditional Routing as Django or Express
+```js
+  <Route path = "/" component = { PostsIndex } />
+  <Route path = "/posts/new" component = { PostsNew } />
+```
+#### Switch Component
+- Import the Swithch Component from 'react-router-dom'
+- Put the most sepcific Path in the top
+```js
+<Switch> 
+  <Route path = "/posts/new" component = { PostsNew } />
+  <Route path = "/" component = { PostsIndex } />
+</Switch>
+```
 
 ## Navigation with the Link Component
 
