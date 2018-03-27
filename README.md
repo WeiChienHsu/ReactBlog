@@ -276,7 +276,7 @@ title:"Kevin"
   }
 ```
 
-## Render the renderPosts in <ul>
+### Render the renderPosts in <ul>
 ```js
       <div>
          <h3>Posts</h3>
@@ -285,3 +285,35 @@ title:"Kevin"
          </ul>
       </div>
 ```
+
+# Create New Posts
+![NewPosts](./image/demo4.png)
+- 1)  Scaffold "PostsNew" component
+- 2) Add Route configuration to show PostsNew component (/posts/new)
+- 3) Add navigation between Index and New (Link between each Pages)
+- 4) Add Form to PostNew
+- 5) Make Action Creator to "Save Post" when use click 'Create', make sure it will be save to Backend
+
+
+## PostsNew
+
+
+## Route Configuration
+
+
+## Navigation with the Link Component
+
+
+## Redux Form
+
+
+## Field Component
+
+## Generalizing Fields
+
+
+## Validating Forms
+
+
+## Showing Errors to Users
+
