@@ -331,8 +331,36 @@ title:"Kevin"
 [Redux Form](https://redux-form.com/7.3.0/)
 - Provide all kinds of examples for all Form!
 
+```
+npm install --save redux-form@6.6.3
+```
+
+- Redux Form uses our Redux instances for handling of the state that is being produced by the form like the actual form that's getting rendered on the screen
+
+### formReducer
+- The form Reducer is being applied to the form piece of state.
+```js
+import { reducer as formReducer} from 'redux-form';
+
+const rootReducer = combineReducers({
+    posts: PostsReducer,
+    form: formReducer
+});
+```
+
+
+## How we use the Redux Form
+![Redux Form](./image/demo5.png)
+
+1. Identify Three differents piece of States we had(Title, Categories, Contents)
+2. Create a Firld Component by React Form. We need to tell what kinds of Inputs we would like to receive from users.(ex Check box)
+3. User changes a 'Field' input
+4. Redux automatically handles those changes for us. (Doing the onClick function, set the states etc. for us) Handle Any Changes!!!
+5. User Submit the form 
+6. Two Callbacks to React Form: validate inputs and handle from submittal.(React Form: OK, the user's inputs data is valid and go take these data to whatever you like to do) 
 
 ## Field Component
+- Import Two Helpers from redux-form in PostsNew Component
 
 ## Generalizing Fields
 
