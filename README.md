@@ -152,10 +152,56 @@ export function fetchPosts() {
 
   return {
     tyep: FETCH_POSTS,
-    payload: request ;
+    payload: request 
   }
 }
 ```
 
 # Post Reducer
+- Produce the post piece of state to reutrn an Object
+```js
+const rootReducer = combineReducers({
+    posts: PostsReducer
+});
+```
+- Default the state as an Object
+- Need a loadash libraries to take the array and create an Object
 
+### _.mapKeys
+- First Argument : an Array
+- Second Argument : Property that we want to poll off of each object in here to use as the key on the resulting Objects.
+```js
+const posts = [
+  { id: 4, title: "Hi"},
+  { id: 5, title: "Hi There!"},
+  { id: 33, title: "Hi Guy!"}
+ ]
+```
+```js
+_.mapKeys(posts,'id')
+```
+- Output will be likes
+```js
+{"4":{"id":4,"title":"Hi"},"5":{"id":5,"title":"Hi There!"},"33":{"id":33,"title":"Hi Guy!"}}
+```
+- Simple ID Lookup
+```js
+const state = _.mapKeys(posts,'id')
+state["4"]
+```
+### Posts Reducer
+```js
+import { FETCH_POSTS} from '../actions';
+import _ from 'lodash';
+
+export default function(state = {}, action) {
+  switch(action.type) {
+    case FETCH_POSTS:
+      return _.mapKeys(action.payload.data, 'id');
+     
+    default:
+      return state;  
+
+  }
+}
+```
