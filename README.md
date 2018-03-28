@@ -426,7 +426,75 @@ export default reduxForm({
 ```
 
 ## Submit Inputs and Validating Forms
+### Validation - Automatically! (from Redux Form)
+- validate function: When User try to submit(press Enter) wil be called, values contain all the inpurs from users
+- -> {title: "abc", categories: "abc", content: "abc"}
+- Logic to validate inputs from 'values': 
+- A variable Errors: If errors is empty, the form is fine to submit
+
+```js
+function validate(values) {
+    const errors = {};
+
+    if(!values.title || values.title.length < 3) {
+      errors.title = "Please Enter a title as least 3 characters!";
+    }
+
+    if(!values.categories) {
+      errors.categories = "Please Enter some catefories!";
+    }
+
+    if(!values.content) {
+      errors.content = "Please Enter some content!";
+    }
+
+    return errors;
+}
+```
+
+### Showing Errors to Users
+- Used Errors Props in renderField function
+```js
+  {field.meta.error}
+```
+### Handling Form Submittal
+- When Redux take information out of this form, the things it will do still depend on us.
+- We want to make sure when we click "onSubmit", validate function will be called automatically
+
+```js
+const { handleSubmit } = this.props;
+```
+- This is a property that is being passed to the component on behalf of redux form.
+- Inside OnSubmit Function -> Since Redux form only handle states and validation, we need to handle other things by oursleves. 
+```js
+  onSubmit(values) {
+      console.log(values);
+  }
+
+  render() {
+    const { handleSubmit } = this.props;
+
+    return(
+      <form onSubmit = { handleSubmit(this.onSubmit.bind(this)) }>
+```
+- We got the values passed out from Redux Form:
+```js
+{title: "adsf", categories: "asdf", content: "asdf"}
+```
+
+### Form and Field States
+Redux Form Works Internally (3 different States):
+- Pristine State: First Show on Screen (User havn't selected or inputed)
+- Touched State: User has selected or focused (When users are typing the input)
+- Invalid State: Show the Error Message
+
+```js
+// Need to show error message when user stats typing or submit
+
+{field.meta.touched ? field.meta.error : ''}
+```
 
 
-## Showing Errors to Users
+### Conditional Styling
+
 
