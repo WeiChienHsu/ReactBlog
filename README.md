@@ -361,8 +361,46 @@ const rootReducer = combineReducers({
 
 ## Field Component
 - Import Two Helpers from redux-form in PostsNew Component
+- reduxForm: Allow Component to communicate with reduxReducer (Just like Connect Helper)
+
+```js
+import { Field, reduxForm } from 'redux-form';
+
+export default reduxForm({
+    form : 'PostsNewForm'
+})(PostsNew);
+```
+
+#### Pass in some props into Field
+- name: What piece of states we're going to use
+- component : Take a function or Component
+```js
+  <Field
+    name = "title"
+    component = {this.renderTitleField}
+  />
+```
+
+#### Component props inside Field Component
+![Helper Function](./image/demo6.png)
+- Redux Form function Helper : JSX blob
+- In the renderTitleField, filed argument contains EventHandler and Props for making sure the Field know it will contact with "title" 
+```js
+  renderTitleField(field) {
+    return(
+      <div>
+          <input 
+            type = "text"
+            {...field.input}
+          />
+      </div>
+    )
+  }
+```
 
 ## Generalizing Fields
+- Add additional Styling to format that input more nicely.
+
 
 
 ## Validating Forms
