@@ -619,3 +619,46 @@ switch(action.type) {
 ```
 
 ## Connect PostShow with PostReducer
+- When will we call that Action Creator: we place that data fetching action creator into a componet Did Mount Life Cycle Method!
+```js
+  componentDidMount() {
+    const { id } = this.props.match.params.id;
+    this.props.fetchPost(id);
+  }
+```
+- We need to tell fetchPost which specific id we need to fetch.
+- Get access URL from React Router
+```js
+ const { id } = this.props.match.params.id;
+```
+- Send the object of list of Posts by using 'mapStateToProps' methods : ownProps -> is the prop going into current component
+- Return the Single Post we want
+```js
+function mapStateToProps({ posts }, ownProps) {
+  return {post: posts[ownProps.match.params.id]};
+}
+```
+
+### Fix Error!! - Check id
+```
+Uncaught TypeError: Cannot read property 'title' of undefined
+```
+- We miss the first part of the whole flow. Our Component try to render on screen before we even attempt to fetch the post
+- We don't hae correct id sitting into the memory
+```js
+   if(!post) {
+      return <div> Loading ... </div>
+    }
+```
+- Dont forget to send "mapStateToProps" into connect helper method
+```js
+export default connect(mapStateToProps, { fetchPost })(PostsShow);
+```
+
+## Caching Records
+
+## Deleting a Post
+
+
+
+
