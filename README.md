@@ -655,10 +655,79 @@ Uncaught TypeError: Cannot read property 'title' of undefined
 export default connect(mapStateToProps, { fetchPost })(PostsShow);
 ```
 
+### Navigation between PostsNew and PostIndex
+- Link for specific Page
+```js
+<Link to = {`/posts/${post.id}`}>
+  {post.title}
+</Link>
+```
+
 ## Caching Records
+- Network usage
+```js
+  componentDidMount() {
+    if(!this.props.post) {
+      const { id } = this.props.match.params;
+      this.props.fetchPost(id);
+    }
+  }
+```
 
 ## Deleting a Post
+- button with props
+```js
+ <Link to = "/" className = "btn btn-primary"> Back To Index </Link>
+          <button
+            className = "btn btn-danger"
+            onClick = {this.onDeleteClick.bind(this)}
+          >
+            Delete Post
+          </button>
+```
+- onDeleteClick Function
+```js
+  onDeleteClick() {
+    const { id } = this.props.match.params;
+    this.props.deletePost(id);
+  }
+```
 
+### Action Creator - deletePost()
+- Import and Add deletePost into connect helper in Post Show Component
+- When we delete the post, need to redirect user back to Index Page
+```js
+  onDeleteClick() {
+    const { id } = this.props.match.params;
+    this.props.deletePost(id,() => {
+      this.props.history.push('/');
+    });
+  }
+
+```
+- We don't need to access the post anymore, really care about we really delete the post from application state, so we could only return the id the make sure
+```js
+export function deletePost(id, callback) {
+  const request = axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`)
+    .then(() => callback());
+  
+  return {
+    type: DELETE_POST,
+    payload: id
+  }
+}
+```
+
+## Local State Managment
+- Handle the case when we're deleting the Post, to get rid of key and value
+- In PostsReducer, lodash omit
+```js
+export default function(state = {}, action) {
+  switch(action.type) {
+
+    case DELETE_POST:
+      return _.omit(state, action.payload);
+```
 
 
 
