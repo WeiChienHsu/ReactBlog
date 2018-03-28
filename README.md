@@ -1,10 +1,24 @@
 # React Blog
+![demo](./image/demo.gif)
 
+### Getting Started
+Checkout this repo, install dependencies, then start the gulp process with the following:
+
+```
+> git clone https://github.com/WeiChienHsu/WeatherReact.git
+> cd WeatherReact
+> npm install
+> npm start
+```
+
+### Features
 - Save and Retrive the Posts
 - Navigate Users (React Router)
 - Add Different Page
 - Load Data from backend API based on user current Route
 - Validation Form to POST data to a remote server
+
+
 
 # How to Build this APP
 

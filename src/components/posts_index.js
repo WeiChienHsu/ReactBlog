@@ -26,12 +26,12 @@ class PostsIndex extends Component{
     // console.log(this.props.posts);
     return(
       <div>
-        <div className = "text-xs-right">
+         <h3>Posts</h3>
+         <div>
           <Link className = "btn btn-primary"  to = "/posts/new">
             Add a Post
           </Link>
         </div>
-         <h3>Posts</h3>
          <ul className = "list-group">
           {this.renderPosts()}
          </ul>
