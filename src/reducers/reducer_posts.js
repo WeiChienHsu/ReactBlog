@@ -1,4 +1,5 @@
 import { FETCH_POSTS } from '../actions';
+import { CREATE_POST } from '../actions';
 import _ from 'lodash';
 
 export default function(state = {}, action) {

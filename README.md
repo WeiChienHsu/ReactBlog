@@ -496,5 +496,26 @@ Redux Form Works Internally (3 different States):
 
 
 ### Conditional Styling
+- Give a conditional Styling by declaring a className as variable
+```js
+  renderField(field) {
+    const className = `form group ${field.meta.touched && field.meta.error ? 'has-danger' : ''}`
+    return(
+      <div className = {className}>
+```
 
+### Navigation - Submit and back to Root Page
+- Link Component to root page
+```js
+  <button type = "submit" className = "btn btn-primary"> Submit </button>
+  <Link to = "/" className = "btn btn-danger">Cancel</Link>
+```
+
+## Post Action Creator - Save the Post on Backend
+- Action Creator: Make a request to our API with axios, and return an Action with Request as payload.
+```js
+
+```
+
+### Navigation Through Callbacks
 
