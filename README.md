@@ -514,8 +514,71 @@ Redux Form Works Internally (3 different States):
 ## Post Action Creator - Save the Post on Backend
 - Action Creator: Make a request to our API with axios, and return an Action with Request as payload.
 ```js
-
+export function createPost(values) {
+    const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values);
+    return {
+      type: CREATE_POST,
+      payload: request
+    }
+  }
+```
+- Connect Action Creator(createPost) with PostsNew Component (Combine two helperes together - reduxForm/connect)
+```js
+export default reduxForm({
+    validate,
+    form : 'PostsNewForm'
+})(
+  connect(null, { createPost })(PostsNew)
+);
+```
+![Result ](./image/demo7.png)
+- Call action creator when we onSubmit
+```js
+  onSubmit(values) {
+      this.props.createPost(values);
+  }
 ```
 
-### Navigation Through Callbacks
+## Navigation Through Callbacks
+![Navigation Grpah](./image/demo8.png)
+After User Submits, we like to redirect user back to List of Posts.
 
+1. User submits form
+2. Validate form 
+3. Call 'onSubmit'
+4. Call an action creator to make API request
+5. Wait.... 
+6. After success, navigate the user to post list
+
+- Link tag is not appropriate now since it's not for programmatic navigation (It's respone to user clicks something)
+
+- We want to automatically navigate the user around our application 
+```js
+  onSubmit(values) {
+      this.props.history.push('/');
+      this.props.createPost(values);
+  }
+```
+
+- We Navigate too soon! Only Redirect when Post is successfuly Created by using Callback function
+- In PostsNew Component: Let history.push as a callback fun citon of createPost function
+```js
+  onSubmit(values) {
+      this.props.createPost(values, () => {
+        this.props.history.push('/');
+      });
+  }
+```
+- In Action Creator: Receive the callback funcion(history.push) and use the Promise. When Post request is successfully created, "then" execute the callback function
+
+```js
+export function createPost(values, callback) {
+    const request = axios.post(`${ROOT_URL}/posts${API_KEY}`, values)
+      .then(() => callback());
+      
+    return {
+      type: CREATE_POST,
+      payload: request
+    }
+  }
+```
