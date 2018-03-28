@@ -591,3 +591,31 @@ export function createPost(values, callback) {
   <Route path = "/posts/:id" component = { PostsShow } />
   <Route path = "/" component = { PostsIndex } />
 ```
+
+### Receiving New Post - Action Creator
+- How to load data inside out Application: We only fetch the specific post that user want to see.
+- Action Creator to Fetch specific post
+```js
+export function fetchPost(id) {
+  const request = axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`);
+  return {
+    type: FETCH_POST,
+    payload: request
+  }
+```
+
+### Receiving New Post - Reducer
+- We Already have some number of posts possibly that have been fetched and stored inside this reducer.
+- Don't throw away all the different data that fetched over time.
+- Add to existing application level state rather than tossing away.
+```js
+switch(action.type) {
+
+  case FETCH_POST:
+  return { ...state, [action.payload.data.id] : action.payload.data };
+
+  case FETCH_POSTS:
+    return _.mapKeys(action.payload.data, 'id');
+```
+
+## Connect PostShow with PostReducer
