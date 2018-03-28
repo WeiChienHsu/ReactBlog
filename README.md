@@ -53,7 +53,7 @@ No longer navigating between distinct HTML documents that are being created by s
 ```
 npm install --save react-router-dom@4.0.0
 ```
-![history](./image/deom.png)
+![history](./image/demo.png)
 - User clicks on some links to change the URL inside their browser.
 - Browser said to the History Library and History wil run behind the server for us. To do some oarsing over it and figures out exactly what changed about the URL and pass it to React Router Library.
 - React Router receive the new Route and updates the react component shown on the screen.
@@ -400,10 +400,32 @@ export default reduxForm({
 
 ## Generalizing Fields
 - Add additional Styling to format that input more nicely.
+```js
+<div className = "form-group">
+  <label>Title</label>
+    <input 
+      className = "form-control"
+```
+- Generalizing Other Render Function together by passing arbitrary propseties(label) into Field
+- Used another Label attribute!
+```js
+<label>{field.label}</label>
 
 
+<Field
+  label = "Title"
+  name = "title"
+  component = {this.renderField}
+/>
+<Field
+  label = "Tags"
+  name = "tags"
+  component = {this.renderField}
+/>
 
-## Validating Forms
+```
+
+## Submit Inputs and Validating Forms
 
 
 ## Showing Errors to Users
