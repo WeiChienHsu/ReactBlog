@@ -582,3 +582,12 @@ export function createPost(values, callback) {
     }
   }
 ```
+
+## Post Show Component
+- Create Post Show Component 
+- Add a Routing between PostsNew and PostsIndex : Since if we put path = "/posts/:id" below path ="/posts/new/", new will be saw as an Id
+```js
+  <Route path = "/posts/new" component = { PostsNew } />
+  <Route path = "/posts/:id" component = { PostsShow } />
+  <Route path = "/" component = { PostsIndex } />
+```
